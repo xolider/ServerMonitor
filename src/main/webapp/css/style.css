@@ -1,0 +1,61 @@
+.bg-blue
+{
+    background-color: #304ffe;
+}
+
+h1
+{
+    font-size: 6em;
+    font-family: 'Nunito', sans-serif;
+}
+
+.nav-link, .navbar-brand
+{
+    font-family: 'Nunito', sans-serif;
+}
+
+.neon-button-orange
+{
+    padding: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    overflow: hidden;
+    background: #d84315;
+    border-radius: 10px;
+    color: white;
+    transition: 0.2s;
+}
+
+.neon-button-orange:hover
+{
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 0 10px #d84315, 0 0 20px #d84315;
+}
+
+.index-content
+{
+    border-radius: 10px 10px 0 0;
+    margin-top: 100%;
+    animation-name: index-content-load;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.index-header
+{
+    opacity: 0;
+    margin-bottom: 5em;
+    animation-name: index-content-load;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes index-content-load {
+    to {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        opacity: 1;
+    }
+}

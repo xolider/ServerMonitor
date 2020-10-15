@@ -29,7 +29,7 @@
     <div class="row col-12 bg-white index-content w-100 text-dark h-100">
         <div class="row w-100">
             <div class="col-6">
-                <h3 class="display-4 text-uppercase">Servername</h3>
+                <h3 class="display-4 text-uppercase"><% out.println(request.getAttribute("hostname")); %></h3>
             </div>
             <div class="col-6 text-right">
                 <h3 class="display-4 text-uppercase <%= true == true ? "text-success" : "text-danger" %>">NORMAL</h3>

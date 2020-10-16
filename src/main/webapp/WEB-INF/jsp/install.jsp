@@ -15,11 +15,11 @@
 <body class="bg-blue text-light">
 
     <div class="container">
-        <div class="row col-12 text-center mt-4">
-            <h1>Installation de ServerMonitor</h1>
+        <div class="row text-center col-12 mt-4">
+            <h1 class="display-1">Installation de ServerMonitor</h1>
         </div>
         <div class="row col-12 mt-4 bg-light text-dark rounded shadow-lg">
-            <div class="container-fluid p-4">
+            <div class="container p-4">
                 <c:choose>
                     <c:when test="${param.step == null}">
                         <div class="row col-12 justify-content-center">

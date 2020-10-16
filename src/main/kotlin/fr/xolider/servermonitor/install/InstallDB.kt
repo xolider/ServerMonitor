@@ -32,6 +32,14 @@ class InstallDB: HttpServlet() {
             conn.close()
              */
 
+            val json = Utils.getConfig(req)
+            json.put("db", InstallConfig.instance.dbCredentials)
+            json.put("id", InstallConfig.instance.siteCredentials)
+            InstallConfig.instance.dbCredentials.clear()
+            InstallConfig.instance.siteCredentials.clear()
+
+            Utils.writeConfig(json, req)
+
             val obj = JSONObject()
             obj.put("state", "success")
 

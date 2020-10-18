@@ -16,15 +16,15 @@
     <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav mr-auto">
             <li class="<%= active == 1 ? "active" : "" %>">
-                <a href="#" class="nav-link">Acceuil</a>
+                <a href="${pageContext.request.contextPath}/" class="nav-link">Acceuil</a>
             </li>
             <li class="<%= active == 2 ? "active" : "" %>">
                 <a href="#" class="nav-link">Mon serveur</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li>
-                <a href="#" class="nav-link">Connexion</a>
+            <li class="<%= active == 3 ? "active" : "" %>">
+                <a href="${pageContext.request.contextPath}/login" class="nav-link">Connexion</a>
             </li>
         </ul>
     </div>

@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServletResponse
 class IndexServlet: HttpServlet() {
 
     override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
-        val installExists = File(req.servletContext.getRealPath("."), "settings.json").exists()
+        val installExists = File(req.servletContext.getRealPath("."), "WEB-INF/settings.json").exists()
         if(!installExists) {
             resp.sendRedirect(req.servletContext.contextPath + "/install")
         }
         else {
             req.setAttribute("hostname", Utils.hostname)
+            req.setAttribute("address", Utils.address)
             req.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req, resp)
         }
     }

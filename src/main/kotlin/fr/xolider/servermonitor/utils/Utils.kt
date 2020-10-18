@@ -5,6 +5,7 @@ import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
 import java.lang.Exception
+import java.net.Inet4Address
 import java.net.InetAddress
 import java.sql.Connection
 import java.sql.DriverManager
@@ -15,6 +16,7 @@ class Utils {
 
     companion object {
         val hostname = InetAddress.getLocalHost().hostName
+        val address = Inet4Address.getLocalHost().hostAddress
 
         fun getDatabase(dbhost: String, dbport: Int, dbuser: String, dbpass: String, dbname: String): Connection {
 
@@ -28,7 +30,7 @@ class Utils {
         }
 
         fun writeConfig(json: JSONObject, req: HttpServletRequest) {
-            val file = File(req.servletContext.getRealPath("."), "settings.json")
+            val file = File(req.servletContext.getRealPath("."), "WEB-INF/settings.json")
             if(!file.exists()) file.createNewFile()
             val writer = FileWriter(file)
             writer.write(json.toString())

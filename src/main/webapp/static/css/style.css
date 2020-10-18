@@ -1,11 +1,12 @@
 .bg-blue
 {
-    background-color: #304ffe;
+    background-color: #1a237e;
 }
 
 h1
 {
     font-family: 'Nunito', sans-serif;
+    font-size: 9em!important;
 }
 
 .nav-link, .navbar-brand
@@ -35,8 +36,6 @@ h1
 
 .index-content
 {
-    border-radius: 10px 10px 0 0;
-    margin-top: 100%;
     animation-name: index-content-load;
     animation-duration: 1s;
     animation-fill-mode: forwards;
@@ -54,6 +53,16 @@ h1
 .install-content
 {
     border-radius: 10px;
+}
+
+.text-connection-required
+{
+    font-size: 1.3em;
+}
+
+.h-40
+{
+    height: 40%;
 }
 
 @keyframes index-content-load {

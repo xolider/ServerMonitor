@@ -3,15 +3,11 @@ package fr.xolider.servermonitor.install
 import fr.xolider.servermonitor.utils.Utils
 import org.apache.ibatis.jdbc.ScriptRunner
 import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.File
-import java.io.FileReader
-import java.sql.SQLException
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-class InstallDB: HttpServlet() {
+class FillDB: HttpServlet() {
 
     override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
         val dbhost = InstallConfig.instance.dbCredentials["dbhost"].toString()
@@ -20,19 +16,28 @@ class InstallDB: HttpServlet() {
         val dbpass = InstallConfig.instance.dbCredentials["dbpass"].toString()
         val dbname = InstallConfig.instance.dbCredentials["dbname"].toString()
 
+        val user = InstallConfig.instance.siteCredentials["user"]
+        val pass = InstallConfig.instance.siteCredentials["pass"]
+
         try {
             val conn = Utils.getDatabase(dbhost, dbport, dbuser, dbpass, dbname)
+            conn.autoCommit = true
 
-            val runner = ScriptRunner(conn)
-            runner.runScript(BufferedReader(FileReader(File(req.servletContext.getRealPath("."), "WEB-INF/sql/install.sql"))))
+            val st = conn.createStatement()
+            st.executeUpdate("INSERT INTO users(username, password) VALUES ('$user', '$pass');")
+
+            st.close()
 
             conn.close()
 
-            val json = Utils.getConfig(req)
-            json.put("db", InstallConfig.instance.dbCredentials)
-            json.put("id", InstallConfig.instance.siteCredentials)
+            val config = JSONObject()
+            config.put("db", InstallConfig.instance.dbCredentials)
+            config.put("id", InstallConfig.instance.siteCredentials)
 
-            Utils.writeConfig(json, req)
+            Utils.writeConfig(config, req)
+
+            InstallConfig.instance.siteCredentials.clear()
+            InstallConfig.instance.dbCredentials.clear()
 
             val obj = JSONObject()
             obj.put("state", "success")
@@ -41,7 +46,7 @@ class InstallDB: HttpServlet() {
             resp.contentType = "text/json;charset=UTF-8"
             resp.writer.write(obj.toString())
         }
-        catch (e: SQLException) {
+        catch (e: Exception) {
             e.printStackTrace()
             val obj = JSONObject()
             obj.put("state", "error")

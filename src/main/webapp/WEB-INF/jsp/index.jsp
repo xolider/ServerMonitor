@@ -13,7 +13,7 @@
     <title>ServerMonitor</title>
     <%@include file="css.jsp"%>
 </head>
-<body class="bg-blue text-light overflow-hidden">
+<body class="bg-blue text-light overflow">
 
 <jsp:include page="navbar.jsp">
     <jsp:param name="active" value="1"/>
@@ -23,12 +23,12 @@
     <div class="row col-12 h-25 mx-0 align-content-end justify-content-center index-header">
         <h1 class="h1">ServerMonitor</h1>
     </div>
-    <div class="row h-25 mt-4 index-headerr">
+    <div class="row mt-4 index-headerr">
         <div class="col-12 text-center">
             <a href="#" class="neon-button-orange">Voir mon serveur</a>
         </div>
     </div>
-    <div class="row col-12 bg-white index-content text-dark rounded shadow-lg h-40 mx-0">
+    <div class="row col-12 bg-white index-content text-dark rounded shadow-lg h-40 mt-5 mx-0">
         <div class="container-fluid p-4">
             <div class="row">
                 <div class="col-6">
@@ -43,10 +43,12 @@
                     <h4><%= request.getAttribute("address") %></h4>
                 </div>
             </div>
-            <div class="row h-100 align-content-center">
+            <div class="row h-50 align-content-center">
                 <div class="col-12 text-center">
-                    <c:if test="${sessionScope.get(\"test\") == null}">
+                    <c:if test="${sessionScope.containsKey(\"username\") == false}">
                         <p class="text-muted text-connection-required">Connectez vous pour accéder aux informations</p>
+                    </c:if>
+                    <c:if test="${sessionScope.containsKey(\"username\") == true}">
                     </c:if>
                 </div>
             </div>

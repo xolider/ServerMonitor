@@ -30,7 +30,6 @@ class InstallDB: HttpServlet() {
 
             val json = Utils.getConfig(req)
             json.put("db", InstallConfig.instance.dbCredentials)
-            json.put("id", InstallConfig.instance.siteCredentials)
 
             Utils.writeConfig(json, req)
 

@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse
 class RegisterDBServlet: HttpServlet() {
 
     override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
-        val dbhost = req.getParameter("dbhost")
-        val dbport = req.getParameter("dbport")
-        val dbname = req.getParameter("dbname")
-        val dbuser = req.getParameter("dbuser")
-        val dbpass = req.getParameter("dbpass")
+        val dbhost = req.getParameter("dbhost") as String
+        val dbport = req.getParameter("dbport") as String
+        val dbname = req.getParameter("dbname") as String
+        val dbuser = req.getParameter("dbuser") as String
+        val dbpass = req.getParameter("dbpass") as String
 
         try {
             val conn = Utils.getDatabase(dbhost, dbport.toInt(), dbuser, dbpass, dbname)

@@ -36,6 +36,7 @@ dependencies {
     implementation('mysql:mysql-connector-java:8.0.21')
     implementation('org.json:json:20200518')
     implementation('org.apache.ibatis:ibatis-core:3.0')
+    implementation('org.fusesource:sigar:1.6.4')
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")

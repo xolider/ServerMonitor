@@ -1,6 +1,7 @@
 package fr.xolider.servermonitor
 
 import fr.xolider.servermonitor.utils.Utils
+import org.hyperic.sigar.Sigar
 import java.io.File
 import java.net.Inet4Address
 import java.net.InetAddress

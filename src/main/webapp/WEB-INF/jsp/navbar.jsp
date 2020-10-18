@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 1882721
@@ -23,9 +24,26 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="<%= active == 3 ? "active" : "" %>">
-                <a href="${pageContext.request.contextPath}/login" class="nav-link">Connexion</a>
-            </li>
+            <c:choose>
+                <c:when test="${sessionScope.containsKey(\"username\") == true}">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="fas fa-user"></i>
+                            ${sessionScope.get("username")}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdown">
+                            <a class="dropdown-item" href="#">Paramètres</a>
+                            <a class="dropdown-item" href="#">Déconnexion</a>
+                        </div>
+                    </li>
+                </c:when>
+                <c:when test="${sessionScope.containsKey(\"username\") == false}">
+                    <li class="nav-item <%= active == 3 ? "active" : "" %>">
+                        <a href="${pageContext.request.contextPath}/login" class="nav-link"><i class="fas fa-user"></i> Connexion</a>
+                    </li>
+                </c:when>
+            </c:choose>
         </ul>
     </div>
 </nav>

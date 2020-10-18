@@ -7,6 +7,7 @@ import java.io.FileWriter
 import java.lang.Exception
 import java.net.Inet4Address
 import java.net.InetAddress
+import java.net.NetworkInterface
 import java.sql.Connection
 import java.sql.DriverManager
 import java.util.*
@@ -16,17 +17,25 @@ class Utils {
 
     companion object {
         val hostname = InetAddress.getLocalHost().hostName
-        val address = Inet4Address.getLocalHost().hostAddress
+        val address = InetAddress.getLocalHost().hostAddress
+
+        init {
+            Class.forName("com.mysql.cj.jdbc.Driver")
+        }
 
         fun getDatabase(dbhost: String, dbport: Int, dbuser: String, dbpass: String, dbname: String): Connection {
-
-            Class.forName("com.mysql.cj.jdbc.Driver")
 
             val url = "jdbc:mysql://$dbhost:$dbport/$dbname?serverTimezone=${TimeZone.getDefault().id}"
 
             println(url)
 
             return DriverManager.getConnection(url, dbuser, dbpass)
+        }
+
+        fun getDatabase(req: HttpServletRequest): Connection {
+            val config = getConfig(req)
+            val db = config["db"] as JSONObject
+            return getDatabase(db["dbhost"] as String, (db["dbport"] as String).toInt(), db["dbuser"] as String, db["dbpass"] as String, db["dbname"] as String)
         }
 
         fun writeConfig(json: JSONObject, req: HttpServletRequest) {
@@ -39,7 +48,7 @@ class Utils {
         }
 
         fun getConfig(req: HttpServletRequest): JSONObject {
-            val file = File(req.servletContext.getRealPath("."), "settings.json")
+            val file = File(req.servletContext.getRealPath("."), "WEB-INF/settings.json")
             if(!file.exists()) return JSONObject()
             val reader = FileReader(file)
             var json = JSONObject()

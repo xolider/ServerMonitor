@@ -32,6 +32,15 @@
     </servlet-mapping>
     
     <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>fr.xolider.servermonitor.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
         <servlet-name>RegisterDB</servlet-name>
         <servlet-class>fr.xolider.servermonitor.RegisterDBServlet</servlet-class>
     </servlet>

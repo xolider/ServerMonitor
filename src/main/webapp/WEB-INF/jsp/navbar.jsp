@@ -34,7 +34,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdown">
                             <a class="dropdown-item" href="#">Paramètres</a>
-                            <a class="dropdown-item" href="#">Déconnexion</a>
+                            <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Déconnexion</a>
                         </div>
                     </li>
                 </c:when>

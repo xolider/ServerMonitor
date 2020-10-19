@@ -43,14 +43,32 @@
                     <h4><%= request.getAttribute("address") %></h4>
                 </div>
             </div>
-            <div class="row h-50 align-content-center">
-                <div class="col-12 text-center">
-                    <c:if test="${sessionScope.containsKey(\"username\") == false}">
+            <div class="row h-50 align-content-center justify-content-center">
+                <c:if test="${sessionScope.containsKey(\"username\") == false}">
+                    <div class="col-12 text-center">
                         <p class="text-muted text-connection-required">Connectez vous pour accéder aux informations</p>
-                    </c:if>
-                    <c:if test="${sessionScope.containsKey(\"username\") == true}">
-                    </c:if>
-                </div>
+                    </div>
+                </c:if>
+                <c:if test="${sessionScope.containsKey(\"username\") == true}">
+                    <div class="col-6 justify-content-end d-flex">
+                        <div class="progress-circle over50 p60">
+                            <span>60%</span>
+                            <div class="left-half-clipper">
+                                <div class="first50-bar"></div>
+                                <div class="value-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex">
+                        <div class="progress-circle p40">
+                            <span>40%</span>
+                            <div class="left-half-clipper">
+                                <div class="first50-bar"></div>
+                                <div class="value-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
             </div>
         </div>
     </div>

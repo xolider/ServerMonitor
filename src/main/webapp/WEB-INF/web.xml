@@ -76,6 +76,15 @@
         <url-pattern>/filldb</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>Reboot</servlet-name>
+        <servlet-class>fr.xolider.servermonitor.RebootServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Reboot</servlet-name>
+        <url-pattern>/reboot</url-pattern>
+    </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>*.css</url-pattern>

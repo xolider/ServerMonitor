@@ -1,5 +1,6 @@
 package fr.xolider.servermonitor
 
+import fr.xolider.servermonitor.models.User
 import fr.xolider.servermonitor.utils.Utils
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
@@ -20,14 +21,24 @@ class LoginServlet: HttpServlet() {
         val st = conn.createStatement()
         val rs = st.executeQuery("SELECT * FROM users WHERE username = '$user' AND password = '$password'")
         if(rs.next()) {
+
+            Utils.user = object : User {
+                override val id: Int
+                    get() = rs.getInt("id")
+                override val username: String
+                    get() = rs.getString("username")
+                override val password: String
+                    get() = rs.getString("password")
+                override val isAdmin: Boolean
+                    get() = rs.getBoolean("isAdmin")
+            }
+
             val sess = req.getSession(true)
-            sess.setAttribute("username", rs.getString("username"))
-            sess.setAttribute("password", rs.getString("password"))
+            sess.setAttribute("user", user)
             resp.sendRedirect(req.servletContext.contextPath + "/")
         }
         else {
             resp.sendRedirect(req.servletContext.contextPath + "/login")
         }
-
     }
 }

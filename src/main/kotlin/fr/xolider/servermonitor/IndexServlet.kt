@@ -2,6 +2,7 @@ package fr.xolider.servermonitor
 
 import fr.xolider.servermonitor.utils.Utils
 import org.hyperic.sigar.Sigar
+import java.awt.Toolkit
 import java.io.File
 import java.net.Inet4Address
 import java.net.InetAddress
@@ -20,6 +21,11 @@ class IndexServlet: HttpServlet() {
         else {
             req.setAttribute("hostname", Utils.hostname)
             req.setAttribute("address", Utils.address)
+
+            val runtime = Runtime.getRuntime()
+            val mem = (runtime.totalMemory() - runtime.freeMemory())*100/runtime.totalMemory()
+
+            req.setAttribute("RAM", mem)
             req.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req, resp)
         }
     }

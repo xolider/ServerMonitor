@@ -25,14 +25,14 @@
     </div>
     <div class="row mt-4 index-headerr">
         <div class="col-12 text-center">
-            <a href="#" class="neon-button-orange">Voir mon serveur</a>
+            <a href="#" class="neon-button-orange">Voir mon serveur <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
     <div class="row col-12 bg-white index-content text-dark rounded shadow-lg h-40 mt-5 mx-0">
         <div class="container-fluid p-4">
             <div class="row">
                 <div class="col-6">
-                    <h4 class="text-uppercase"><% out.println(request.getAttribute("hostname")); %></h4>
+                    <h4 class="text-uppercase">${requestScope.get("hostname")}</h4>
                 </div>
                 <div class="col-6 text-right">
                     <h4 class="text-uppercase <%= true == true ? "text-success" : "text-danger" %>">NORMAL</h4>
@@ -44,24 +44,15 @@
                 </div>
             </div>
             <div class="row h-50 align-content-center justify-content-center">
-                <c:if test="${sessionScope.containsKey(\"username\") == false}">
+                <c:if test="${sessionScope.containsKey(\"user\") == false}">
                     <div class="col-12 text-center">
                         <p class="text-muted text-connection-required">Connectez vous pour accéder aux informations</p>
                     </div>
                 </c:if>
-                <c:if test="${sessionScope.containsKey(\"username\") == true}">
-                    <div class="col-6 justify-content-end d-flex">
-                        <div class="progress-circle over50 p60">
-                            <span>60%</span>
-                            <div class="left-half-clipper">
-                                <div class="first50-bar"></div>
-                                <div class="value-bar"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 d-flex">
-                        <div class="progress-circle p40">
-                            <span>40%</span>
+                <c:if test="${sessionScope.containsKey(\"user\") == true}">
+                    <div class="col-6 justify-content-center d-flex">
+                        <div class="progress-circle <%= (Long.parseLong(request.getAttribute("RAM").toString())) > 50 ? "over50" : "" %> p<%= request.getAttribute("RAM") %>">
+                            <span>RAM<br><%= request.getAttribute("RAM") %>%</span>
                             <div class="left-half-clipper">
                                 <div class="first50-bar"></div>
                                 <div class="value-bar"></div>

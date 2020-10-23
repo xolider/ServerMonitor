@@ -1,5 +1,6 @@
 package fr.xolider.servermonitor.utils
 
+import fr.xolider.servermonitor.models.User
 import org.json.JSONObject
 import java.io.File
 import java.io.FileReader
@@ -18,6 +19,7 @@ class Utils {
     companion object {
         val hostname = InetAddress.getLocalHost().hostName
         val address = InetAddress.getLocalHost().hostAddress
+        var user: User? = null
 
         init {
             Class.forName("com.mysql.cj.jdbc.Driver")
